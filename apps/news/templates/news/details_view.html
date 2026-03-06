@@ -1,0 +1,36 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="features container mt-4">
+    <div class="alert alert-warning shadow-sm mb-4">
+        <!-- Блок автора (тепер через article.author_pet) -->
+        <div class="d-flex align-items-center mb-3 pb-2 border-bottom">
+            {% if article.author_pet.photo %}
+                <img src="{{ article.author_pet.photo.url }}" 
+                     class="rounded-circle me-2" 
+                     style="width: 60px; height: 60px; object-fit: cover; border: 2px solid #fff;">
+            {% endif %}
+            <div>
+                <strong class="d-block text-dark">{{ article.author_pet.name }}</strong>
+                <small class="text-muted">{{ article.author_pet.get_species_display }}</small>
+            </div>
+            <div class="ms-auto text-end">
+                <small class="text-secondary d-block">{{ article.created_at|date:"d.m.Y H:i" }}</small>
+            </div>
+        </div>
+        <h1>{{ article.title }}</h1>
+        <p class="lead"><b>{{ article.anons }}</b></p>
+        <p>{{ article.full_text|linebreaks }}</p> 
+
+        {% if user.is_authenticated and user == article.author_pet.owner.user %}
+            <hr>
+            <div class="d-flex gap-2">
+                <a href="{% url 'news-update' article.id %}" class="btn btn-warning">Редагувати</a>
+                <a href="{% url 'news-delete' article.id %}" class="btn btn-danger">Видалити</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

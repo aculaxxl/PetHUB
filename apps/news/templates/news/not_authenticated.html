@@ -1,0 +1,22 @@
+
+{% extends 'main/layout.html' %}
+
+{% block title %}Доступ обмежено{% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>Додати новину на сайт</h1> <!-- Заголовок такой же, как в create.html -->
+    
+    <div class="alert alert-warning shadow-sm mt-4" style="border-radius: 10px; padding: 30px;">
+        <h3 style="color: #333; margin-bottom: 20px;">Упс! Ви не авторизовані</h3>
+        <p style="font-size: 1.1rem; color: #555;">
+            Тільки власники тваринок можуть ділитися новинами від імені своїх улюбленців.
+        </p>
+        <hr>
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="btn">Увійти в PetHub</a>
+            <a href="{% url 'home' %}" class="btn">На головну</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

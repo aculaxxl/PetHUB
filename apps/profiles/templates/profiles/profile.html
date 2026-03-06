@@ -1,0 +1,44 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+        <div>
+            <h2>Мій профіль</h2>
+            <p class="text-muted mb-0"><i class="fa-solid fa-phone"></i> {{ user.phone_number }}</p>
+        </div>
+       
+    </div>
+
+    <h4>Мої улюбленці:</h4>
+    <div class="row mt-4">
+        {% for pet in user.profile.pets.all %}
+            <div class="col-md-4 mb-3">
+                <a href="{% url 'pet_detail' pet.id %}" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow-sm">
+                        {% if pet.photo %}
+                            <img src="{{ pet.photo.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ pet.name }}</h5>
+                            <span class="badge bg-light text-dark border">{{ pet.get_species_display }}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% empty %}
+            
+            <div class="col-12 text-center py-5">
+                <i class="fa-solid fa-paw fa-3x text-light mb-3"></i>
+                <p class="text-muted fs-5">У вас поки немає доданих тваринок.</p>
+                <p class="text-muted fs-5">Натисніть кнопку нижче, щоб додати першого улюбленця!</p>
+            </div>
+        {% endfor %}
+        <div class="text-center mt-4 mb-5">
+            <a href="{% url 'add_pet' %}" class="btn">
+                <i class="fa-solid fa-plus"></i> Додати тваринку
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

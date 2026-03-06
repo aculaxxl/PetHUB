@@ -1,0 +1,9 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Сторінка{% endblock %}
+
+{% block content %}
+<h4>Що таке PetHUB?</h4>
+<p>Це блог твого улюбленця! Створюй акаунт свого пухнастика та розкжи усьому світу про що він думає!</p>
+<a href="{% url 'news_home' %}" class="btn">Перейти до новин</a>
+{% endblock %}
