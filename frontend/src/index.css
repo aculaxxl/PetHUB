@@ -1,0 +1,80 @@
+/* Обнуление */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background-color: #f0f2f5; color: #1a1a1a; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+.app-layout { display: flex; min-height: 100vh; }
+
+/* Сайдбар — Темно-синий, текст белый */
+.sidebar {
+  width: 260px;
+  background: #1c1e21;
+  color: #ffffff;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+}
+
+.sidebar h2 { margin-bottom: 40px; color: #4f46e5; font-size: 24px; text-align: center; }
+
+.sidebar nav { display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+
+.sidebar a {
+  color: #e4e6eb;
+  text-decoration: none;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.sidebar a:hover { background: #3a3b3c; color: #fff; }
+
+/* Контент — Светло-серый фон, черный текст */
+.content {
+  margin-left: 260px; /* Чтобы не залезать под сайдбар */
+  flex-grow: 1;
+  padding: 40px;
+  min-height: 100vh;
+  color: #1c1e21; /* Явный черный цвет текста */
+}
+
+/* Карточки */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+}
+
+h1, h3 { color: #1c1e21; margin-bottom: 20px; }
+p, li { color: #4b5563; line-height: 1.6; }
+
+/* Кнопки и инпуты */
+.input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #e4e6eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+}
+
+.btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn:hover { background: #4338ca; }
+
+.logout-btn { background: #dc2626; margin-top: auto; }
