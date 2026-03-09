@@ -4,13 +4,6 @@ PetHub is a specialized social network designed for pet owners. Unlike tradition
 
 ##  Key Features
 
-- **Unique Authentication:** Phone-number-based login with terminal-generated verification codes (OTP logic).
-- **Pet-Centric Social Feed:** Users post news on behalf of their pets, featuring pet avatars and names in the feed.
-- **Secure Architecture:** Full JWT-based authentication with automated **Access/Refresh token** rotation logic on the frontend.
-- **Profile Management:** Comprehensive management for user profiles and multiple pet profiles per user.
-- **Role-Based Access Control:** Strict object-level permissions ensuring only owners can edit or delete their pet's content.
-- **Modern API Documentation:** Automated API schema generation using **Swagger/OpenAPI**.
-
 ##  Tech Stack
 
 ### Backend

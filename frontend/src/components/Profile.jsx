@@ -1,4 +1,4 @@
-import { useState } from 'react'; // ОБОВ'ЯЗКОВО
+import { useState } from 'react'; 
 import { Link } from 'react-router-dom';
 
 export default function Profile({ data, onLogout, onUpdateName }) {
@@ -6,20 +6,19 @@ export default function Profile({ data, onLogout, onUpdateName }) {
   const [newName, setNewName] = useState(data?.name || "");
 
   const handleSave = () => {
-    onUpdateName(newName); // Викликає функцію з ProfilePage
+    onUpdateName(newName);
     setIsEditing(false);
   };
 
   return (
     <div className="card">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        {/* ЛОГІКА ЗАГОЛОВКА: ТЕКСТ АБО ІНПУТ */}
         {isEditing ? (
           <div style={{ display: 'flex', gap: '10px' }}>
             <input 
               value={newName} 
               onChange={(e) => setNewName(e.target.value)} 
-              className="input-edit" // Додай стилів пізніше
+              className="input-edit" 
             />
             <button onClick={handleSave} className="btn-save">Зберегти</button>
             <button onClick={() => setIsEditing(false)} className="btn-cancel">Скасувати</button>
@@ -39,7 +38,6 @@ export default function Profile({ data, onLogout, onUpdateName }) {
         <button className="btn logout-btn" onClick={onLogout}>Вийти</button>
       </div>
       
-      {/* Решта твого коду з ID, локацією та списком тваринок... */}
     </div>
   );
 }

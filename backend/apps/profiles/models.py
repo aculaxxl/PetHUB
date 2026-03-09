@@ -28,13 +28,25 @@ class Pet(models.Model):
         ('rabbit', 'Кролик'),
         ('other', 'Інше'),
     ]
+    STATUS_CHOICES = [
+        ('active', "Я маю сім'ю"),
+        ('adoption', "Шукаю сім'ю"),
+        ('adopted', "Знайшов сім'ю"),
+    ]
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='pets')
+    old_owners = models.ManyToManyField(Profile, related_name='past_pets', blank=True)
     name = models.CharField(max_length=100, verbose_name="Ім'я тваринки")
     species = models.CharField(
         max_length=20, 
         choices=SPECIES_CHOICES, 
         default='dog', 
         verbose_name="Вид"
+    )
+    status = models.CharField(
+        max_length=20, 
+        choices=STATUS_CHOICES, 
+        default='active', 
+        verbose_name="Статус"
     )
     birth_date = models.DateField(verbose_name="Дата народження")
     photo = models.ImageField(upload_to='pets_photos/', default='default_pet.jpg')

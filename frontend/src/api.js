@@ -15,12 +15,10 @@ export const apiRequest = async (endpoint, method = 'GET', data = null) => {
     try {
         let response = await fetch(`${BASE_URL}${endpoint}`, config);
 
-        // Якщо токен протух (401)
         if (response.status === 401) {
             const refreshToken = localStorage.getItem('refresh');
             
             if (refreshToken) {
-                // Спроба оновити токен
                 const refreshResponse = await fetch(`${BASE_URL}/token/refresh/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -31,11 +29,9 @@ export const apiRequest = async (endpoint, method = 'GET', data = null) => {
                     const refreshData = await refreshResponse.json();
                     localStorage.setItem('token', refreshData.access);
                     
-                    // Повтор запиту з новим токеном
                     config.headers['Authorization'] = `Bearer ${refreshData.access}`;
                     response = await fetch(`${BASE_URL}${endpoint}`, config);
                 } else {
-                    // Якщо рефреш теж не підійшов
                     localStorage.clear();
                     window.location.href = '/login';
                     return;
@@ -59,7 +55,7 @@ export const apiRequest = async (endpoint, method = 'GET', data = null) => {
     }
 };
 
-// Публічний запит для логіну/реєстрації
+
 export const publicRequest = async (endpoint, method = 'POST', data = null) => {
     const config = {
         method,
