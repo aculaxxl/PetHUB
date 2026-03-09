@@ -45,8 +45,7 @@ export default function ProfilePage() {
   return (
     <div className="container" style={{ maxWidth: '600px', margin: '20px auto', padding: '20px' }}>
       <div className="card" style={{ background: 'white', padding: '25px', borderRadius: '15px', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
-        
-        {/* ШАПКА ПРОФІЛЮ */}
+
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
           {isEditing ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', flexGrow: 1, marginRight: '15px' }}>
@@ -68,7 +67,7 @@ export default function ProfilePage() {
 
         <hr style={{ border: '0', borderTop: '1px solid #eee', margin: '20px 0' }} />
 
-        {/* СПИСОК ТВАРИНОК (Тільки тварини та можливість клікнути) */}
+
         <h3 style={{ marginTop: '20px', color: '#333' }}>🐾 Мої улюбленці ({profile.pets?.length || 0})</h3>
         <div style={{ marginTop: '15px' }}>
           {profile.pets && profile.pets.length > 0 ? (
@@ -87,7 +86,6 @@ export default function ProfilePage() {
           ) : <p style={{ color: '#999', fontStyle: 'italic' }}>Ви ще не додали тваринок.</p>}
         </div>
 
-        {/* ВИПУСКНИКИ */}
         {profile.past_pets?.length > 0 && (
           <div style={{ marginTop: '30px', borderTop: '2px dashed #f0f0f0', paddingTop: '20px' }}>
             <h3 style={{ color: '#666', fontSize: '18px' }}>✨ Знайшли нову родину</h3>
@@ -104,7 +102,6 @@ export default function ProfilePage() {
         )}
       </div>
 
-      {/* ФОРМА ДОДАВАННЯ */}
       <div style={{ marginTop: '25px' }}>
         <AddPetForm onPetAdded={loadProfile} />
       </div>

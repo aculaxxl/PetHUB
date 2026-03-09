@@ -25,7 +25,7 @@ export default function PetDetailPage() {
         species: petData.species,
         birth_date: petData.birth_date,
         status: petData.status
-      });
+      }); 
 
   
       const userData = await apiRequest('/profile/me/');
@@ -94,11 +94,11 @@ export default function PetDetailPage() {
   
   const handleSendRequest = async () => {
     try {
-        await apiRequest('/profile/adoption-requests/', 'POST', { pet: id });
+        await apiRequest('/adoption/adoption-requests/', 'POST', { pet: id });
         alert("Заявку відправлено! ✨");
     } catch (err) {
         console.error(err);
-        alert("Сталася помилка при відправці запиту.");
+        alert("Сталася помилка при відправці запиту."); 
     }
 };
   return (

@@ -19,8 +19,8 @@ export default function RequestsPage() {
   useEffect(() => { loadData(); }, []);
 
   const handleAction = async (id, status) => {
-    try {
-      await apiRequest(`/profile/adoption-requests/${id}/`, 'PATCH', { status });
+    try { 
+      await apiRequest(`/adoption/adoption-requests/${id}/`, 'PATCH', { status });
       loadData();
     } catch (err) { alert("Помилка оновлення"); }
   };
@@ -31,7 +31,6 @@ export default function RequestsPage() {
     <div className="container" style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 20px', fontFamily: 'sans-serif' }}>
       <h1 style={{ textAlign: 'center', marginBottom: '40px' }}>📩 Центр запитів</h1>
 
-      {/* --- СЕКЦІЯ 1: ВХІДНІ ЗАПИТИ (Хто хоче моїх тваринок) --- */}
       <section style={{ marginBottom: '60px' }}>
         <h2 style={{ color: '#4f46e5', borderBottom: '2px solid #eee', paddingBottom: '10px' }}>📥 Вхідні запити</h2>
         {incoming.length > 0 ? incoming.map(req => (
@@ -54,7 +53,6 @@ export default function RequestsPage() {
         )) : <p style={{ color: '#999' }}>У вас поки немає запитів від інших користувачів.</p>}
       </section>
 
-      {/* --- СЕКЦІЯ 2: МОЇ ЗАЯВКИ (Кого хочу забрати я) --- */}
       <section>
         <h2 style={{ color: '#10b981', borderBottom: '2px solid #eee', paddingBottom: '10px' }}>📤 Мої заявки</h2>
         {outgoing.length > 0 ? outgoing.map(req => (
