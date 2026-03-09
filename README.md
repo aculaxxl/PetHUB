@@ -49,3 +49,6 @@ PetHub is a specialized social network designed for pet owners. Unlike tradition
 - **API Documentation (Swagger):** [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/) — *Interactive portal to explore and test all API endpoints.*
 
 > **Note:** The backend API root is located at `http://localhost:8000/api/`. Use the Swagger UI above to interact with specific resources like `/news/` or `/profile/`.
+
+Project author:
+Yelyzaveta Novitska
