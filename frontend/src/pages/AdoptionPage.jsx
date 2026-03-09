@@ -88,7 +88,7 @@ export default function AdoptionPage() {
                 </button>
               </div>
             </Link>
-          ))}
+          ))} 
         </div>
       ) : (
         <div style={{ 
