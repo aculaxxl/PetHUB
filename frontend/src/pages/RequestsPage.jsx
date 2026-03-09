@@ -20,7 +20,7 @@ export default function RequestsPage() {
 
   const handleAction = async (id, status) => {
     try {
-      await apiRequest(`/profile/adoption-requests/${id}/`, 'PATCH', { status });
+      await apiRequest(`/adoption/adoption-requests/${id}/`, 'PATCH', { status });
       loadData();
     } catch (err) { alert("Помилка оновлення"); }
   };

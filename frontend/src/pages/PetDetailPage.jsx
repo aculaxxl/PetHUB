@@ -94,7 +94,7 @@ export default function PetDetailPage() {
   
   const handleSendRequest = async () => {
     try {
-        await apiRequest('/profile/adoption-requests/', 'POST', { pet: id });
+        await apiRequest('/adoption/adoption-requests/', 'POST', { pet: id });
         alert("Заявку відправлено! ✨");
     } catch (err) {
         console.error(err);
