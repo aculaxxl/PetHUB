@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from .models import Pet, Profile, AdoptionRequest
+from .models import Pet, Profile
+from apps.adoption.models import AdoptionRequest
 from drf_spectacular.utils import extend_schema_field 
+from apps.adoption.serializers import AdoptionRequestSerializer
 
 class PetSerializer(serializers.ModelSerializer):
     species_display = serializers.CharField(source='get_species_display', read_only=True)
@@ -38,25 +40,6 @@ class PetSerializer(serializers.ModelSerializer):
             return obj.owner.user.phone_number
             
         return "Номер буде доступний після підтвердження"
-class AdoptionRequestSerializer(serializers.ModelSerializer):
-    requester_name = serializers.CharField(source='requester.name', read_only=True)
-    requester_phone = serializers.SerializerMethodField() 
-    pet_name = serializers.CharField(source='pet.name', read_only=True)
-    owner_phone = serializers.SerializerMethodField()
-
-    class Meta:
-        model = AdoptionRequest
-        fields = ['id', 'pet', 'pet_name', 'requester', 'requester_name', 'requester_phone', 'owner_phone', 'status']
-        read_only_fields = ['requester']
-
-    def get_requester_phone(self, obj):
-        if obj.status == 'approved':
-            return obj.requester.user.phone_number
-        return "Буде доступно після схвалення"
-    def get_owner_phone(self, obj):
-        if obj.status == 'approved':
-            return obj.pet.owner.user.phone_number
-        return "Буде доступно після схвалення"
 
 class ProfileSerializer(serializers.ModelSerializer):
     pets = PetSerializer(many=True, read_only=True)
@@ -72,11 +55,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     @extend_schema_field(serializers.ListSerializer(child=serializers.DictField()))
     def get_incoming_requests(self, obj):
         requests = AdoptionRequest.objects.filter(pet__owner=obj, status__in=['pending', 'approved', 'rejected'])
-        return AdoptionRequestSerializer(requests, many=True).data
+        return AdoptionRequestSerializer(requests, many=True, context=self.context).data
     @extend_schema_field(AdoptionRequestSerializer(many=True))
     def get_my_sent_requests(self, obj):
         requests = AdoptionRequest.objects.filter(requester=obj).order_by('-created_at')
-        return AdoptionRequestSerializer(requests, many=True).data
+        return AdoptionRequestSerializer(requests, many=True, context=self.context).data
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:

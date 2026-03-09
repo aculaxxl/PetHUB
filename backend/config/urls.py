@@ -10,6 +10,7 @@ urlpatterns = [
     path("api/news/", include("apps.news.urls")),
     path('api/auth/', include('apps.user.urls')),     
     path('api/profile/', include('apps.profiles.urls')), 
+    path('api/adoption/', include('apps.adoption.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

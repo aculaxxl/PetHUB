@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "apps.news",
     "apps.user",
-    "apps.profiles"
+    "apps.profiles",
+    "apps.adoption"
 ]
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
