@@ -9,12 +9,11 @@ export default function NewsDetailPage() {
   const [currentUserId, setCurrentUserId] = useState(null);
 
   useEffect(() => {
-    // 1. Узнаем КТО залогинен
     apiRequest('/profile/me/')
       .then(data => setCurrentUserId(data.id))
       .catch(() => console.log("Пользователь не залогинен"));
 
-    // 2. Загружаем новость
+
     apiRequest(`/news/${id}/`)
       .then(setPost)
       .catch(err => {
@@ -35,10 +34,8 @@ export default function NewsDetailPage() {
     }
   };
 
-  // Если данных еще нет — показываем загрузку (это защищает от белого экрана)
   if (!post) return <div className="container">Завантаження...</div>;
 
-  // Проверяем: ID владельца новости == ID текущего юзера
   const isOwner = post.owner_id === currentUserId;
 
   return (

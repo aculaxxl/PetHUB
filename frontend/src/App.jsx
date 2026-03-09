@@ -2,15 +2,12 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-ro
 import { useState } from 'react';
 import './App.css';
 
-// Імпортуємо наші сторінки
 import HomePage from './pages/HomePage';
 import NewsPage from './pages/NewsPage';
 import NewsEditPage from './components/NewsEditPage';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import PetDetailPage from './pages/PetDetailPage'; 
-
-// ВИПРАВЛЕНО: шлях веде до папки components
 import NewsDetailPage from './components/NewsDetailPage'; 
 
 function App() {

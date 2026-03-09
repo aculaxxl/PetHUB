@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiRequest } from '../api';
-import { Link } from 'react-router-dom'; // 1. ДОДАЛИ ІМПОРТ
+import { Link } from 'react-router-dom';
 import NewsCreatePage from '../components/NewsCreatePage';
 
 export default function NewsPage() {
@@ -20,7 +20,6 @@ export default function NewsPage() {
   return (
     <div className="container" style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
       
-      {/* Шапка стрічки */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', gap: '15px' }}>
         <h1 style={{ margin: 0, fontSize: '28px', flex: 1, whiteSpace: 'nowrap' }}>
           📰 Стрічка новин
@@ -51,7 +50,6 @@ export default function NewsPage() {
       <div className="news-feed">
         {posts.length > 0 ? (
           posts.map(post => (
-            // 2. ОБГОРНУЛИ ВСЮ КАРТКУ В LINK
             <Link to={`/news/${post.id}`} key={post.id} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="card post-card" style={{ marginBottom: '20px', padding: '20px', background: 'white', borderRadius: '15px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', transition: 'transform 0.2s', cursor: 'pointer' }}>
                 

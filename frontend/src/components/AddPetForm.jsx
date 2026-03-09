@@ -3,29 +3,25 @@ import { apiRequest } from '../api';
 
 export default function AddPetForm({ onPetAdded }) {
   const [formData, setFormData] = useState({ name: '', species: 'dog', birth_date: '' });
-  const [photo, setPhoto] = useState(null); // Состояние для файла
+  const [photo, setPhoto] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // ДЛЯ ФОТО НУЖЕН FormData (JSON не умеет передавать файлы)
     const data = new FormData();
     data.append('name', formData.name);
     data.append('species', formData.species);
     data.append('birth_date', formData.birth_date);
     if (photo) {
-      data.append('photo', photo); // Ключ 'photo' должен совпадать с именем в Django
+      data.append('photo', photo); 
     }
 
     try {
-      // ВАЖНО: для FormData заголовок 'Content-Type' в fetch ставить НЕЛЬЗЯ (браузер сделает это сам)
-      // Поэтому нам нужно слегка изменить вызов apiRequest или использовать обычный fetch
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:8000/api/profile/pets/', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
-          // Content-Type тут НЕ ПИШЕМ!
         },
         body: data
       });
@@ -35,7 +31,6 @@ export default function AddPetForm({ onPetAdded }) {
       const newPet = await response.json();
       alert('Улюбленця додано!');
       
-      // Очистка
       setFormData({ name: '', species: 'dog', birth_date: '' });
       setPhoto(null);
       onPetAdded(newPet);
@@ -68,7 +63,6 @@ export default function AddPetForm({ onPetAdded }) {
           value={formData.birth_date} onChange={e => setFormData({...formData, birth_date: e.target.value})} 
         />
 
-        {/* НОВОЕ ПОЛЕ ДЛЯ ФОТО */}
         <div style={{ margin: '10px 0' }}>
           <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px' }}>Фото улюбленця:</label>
           <input 

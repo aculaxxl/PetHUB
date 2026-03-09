@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { apiRequest } from '../api';
 
-export default function NewsCreatePage({ onPostCreated }) { // Додали пропс
+export default function NewsCreatePage({ onPostCreated }) { 
     const [myPets, setMyPets] = useState([]);
     const [formData, setFormData] = useState({
         author_pet: '',
@@ -11,11 +11,9 @@ export default function NewsCreatePage({ onPostCreated }) { // Додали пр
     });
 
     useEffect(() => {
-        // Отримуємо тваринок юзера для списку
         apiRequest('/profile/me/').then(data => {
             if (data.pets && data.pets.length > 0) {
                 setMyPets(data.pets);
-                // Встановлюємо першу тваринку за замовчуванням
                 setFormData(prev => ({ ...prev, author_pet: data.pets[0].id }));
             }
         }).catch(err => console.error("Не вдалося завантажити тваринок:", err));
@@ -24,11 +22,10 @@ export default function NewsCreatePage({ onPostCreated }) { // Додали пр
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        // Передаємо шлях, метод 'POST' та об'єкт formData
         await apiRequest('/news/', 'POST', formData);
         
         alert("Новину опубліковано! 🐾");
-        onPostCreated(); // Оновлює стрічку
+        onPostCreated(); 
     } catch (err) {
         console.error("Деталі помилки:", err);
         alert("Помилка при створенні. Перевірте консоль.");

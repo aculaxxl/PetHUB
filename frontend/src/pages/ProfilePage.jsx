@@ -7,14 +7,13 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState("");
-  const [newLocation, setNewLocation] = useState(""); // 1. ДОДАЛИ СТАН ДЛЯ ЛОКАЦІЇ
+  const [newLocation, setNewLocation] = useState(""); 
 
    const loadProfile = () => {
     apiRequest('/profile/me/')
       .then(setProfile)
       .catch(err => {
          console.error(err);
-         // Якщо сталася помилка, треба вивести повідомлення, інакше буде вічне "Завантаження"
          alert("Не вдалося завантажити профіль. Спробуйте увійти знову.");
       });
   };
@@ -25,7 +24,6 @@ export default function ProfilePage() {
 
   const handleUpdateProfile = async () => {
     try {
-      // 3. ВІДПРАВЛЯЄМО ОБИДВА ПОЛЯ НА БЕКЕНД
       const updatedData = await apiRequest('/profile/me/update/', 'PATCH', { 
         name: newName,
         location: newLocation 
@@ -57,7 +55,6 @@ export default function ProfilePage() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
           
           {isEditing ? (
-            /* 4. РЕЖИМ РЕДАГУВАННЯ: ДВА ІНПУТИ ОДИН ПІД ОДНИМ */
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', flexGrow: 1, marginRight: '15px' }}>
               <input 
                 value={newName} 
@@ -77,7 +74,6 @@ export default function ProfilePage() {
               </div>
             </div>
           ) : (
-            /* РЕЖИМ ПЕРЕГЛЯДУ */
             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <h2 style={{ margin: 0, color: '#1c1e21' }}>👤 {profile.name || "Мій профіль"}</h2>

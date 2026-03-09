@@ -3,18 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { publicRequest } from '../api';
 
 export default function LoginPage({ setToken }) {
-  const [step, setStep] = useState(1); // 1 - ввод телефона, 2 - ввод кода
+  const [step, setStep] = useState(1); 
   const [phone, setPhone] = useState('');
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // 1. Отправляем телефон -> Django пишет код в терминал
   const handleRequestCode = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      // Путь должен совпадать с urls.py (например /auth/request-code/)
       await publicRequest('/auth/request-code/', 'POST', { phone });
       setStep(2);
     } catch (err) {
@@ -22,14 +20,12 @@ export default function LoginPage({ setToken }) {
     }
   };
 
-  // 2. Отправляем код из терминала -> Django дает JWT
   const handleVerifyCode = async (e) => {
     e.preventDefault();
     setError('');
     try {
       const data = await publicRequest('/auth/verify-code/', 'POST', { phone, code });
       
-      // ВАЖНО: Django возвращает { access: "...", refresh: "..." }
       if (data.access) {
         localStorage.setItem('token', data.access);
         localStorage.setItem('refresh', data.refresh); 

@@ -3,10 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { apiRequest } from '../api';
 
 export default function NewsEditPage() {
-  const { id } = useParams(); // Получаем ID новости из URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
-  
-  // Состояние для полей формы
+
   const [formData, setFormData] = useState({
     title: '',
     anons: '',
@@ -15,11 +14,9 @@ export default function NewsEditPage() {
   
   const [loading, setLoading] = useState(true);
 
-  // 1. ЗАГРУЖАЕМ СТАРЫЕ ДАННЫЕ ПРИ ОТКРЫТИИ СТРАНИЦЫ
   useEffect(() => {
     apiRequest(`/news/${id}/`)
       .then(data => {
-        // Записываем полученные данные в форму
         setFormData({
           title: data.title || '',
           anons: data.anons || '',
@@ -34,14 +31,12 @@ export default function NewsEditPage() {
       });
   }, [id, navigate]);
 
-  // 2. ФУНКЦИЯ СОХРАНЕНИЯ ИЗМЕНЕНИЙ
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      // Отправляем PATCH запрос на сервер с обновленными данными
       await apiRequest(`/news/${id}/`, 'PATCH', formData);
       alert("Новину успішно оновлено! ✨");
-      navigate(`/news/${id}`); // Возвращаемся на страницу просмотра новости
+      navigate(`/news/${id}`); 
     } catch (err) {
       console.error("Ошибка при обновлении:", err);
       alert("Не вдалося зберегти зміни");

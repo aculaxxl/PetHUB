@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { apiRequest } from '../api';
 
 export default function PetDetailPage() {
-  const { id } = useParams(); // Достаем ID из ссылки /pets/:id
+  const { id } = useParams(); 
   const [pet, setPet] = useState(null);
 
   useEffect(() => {
@@ -27,7 +27,6 @@ export default function PetDetailPage() {
         <div>
           <p><strong>Вид:</strong> {pet.species_display}</p>
           <p><strong>Дата народження:</strong> {new Date(pet.birth_date).toLocaleDateString()}</p>
-          {/* Тут позже добавим кнопку "Редагувати" или "Видалити" */}
         </div>
       </div>
     </div>
