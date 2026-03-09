@@ -8,7 +8,8 @@ import NewsEditPage from './components/NewsEditPage';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import PetDetailPage from './pages/PetDetailPage'; 
-
+import AdoptionPage from './pages/AdoptionPage';
+import RequestsPage from './pages/RequestsPage';
 
 import NewsDetailPage from './components/NewsDetailPage'; 
 
@@ -29,6 +30,8 @@ function App() {
           <nav>
             <Link to="/">🏠 Головна</Link>
             <Link to="/news">📰 Новини</Link>
+            <Link to="/adoption">🔍 Адопція</Link> 
+            <Link to="/requests">📩 Запити</Link> 
             <Link to="/profile">👤 Мій профіль</Link>
           </nav>
           
@@ -45,8 +48,10 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/adoption" element={<AdoptionPage />} />
             <Route path="/news/:id" element={<NewsDetailPage />} />
             <Route path="/news/:id/edit" element={<NewsEditPage />} /> 
+            <Route path="/requests" element={<RequestsPage />} />
             
             <Route 
               path="/profile" 
