@@ -1,31 +1,34 @@
 import { useState } from 'react';
-import { apiRequest } from '../api';
 
 export default function AddPetForm({ onPetAdded }) {
-  const [formData, setFormData] = useState({ name: '', species: 'dog', birth_date: '' });
-  const [photo, setPhoto] = useState(null); // Состояние для файла
+
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    species: 'dog', 
+    birth_date: '',
+    status: 'active' 
+  });
+  const [photo, setPhoto] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // ДЛЯ ФОТО НУЖЕН FormData (JSON не умеет передавать файлы)
+
     const data = new FormData();
     data.append('name', formData.name);
     data.append('species', formData.species);
     data.append('birth_date', formData.birth_date);
+    data.append('status', formData.status); 
+    
     if (photo) {
-      data.append('photo', photo); // Ключ 'photo' должен совпадать с именем в Django
+      data.append('photo', photo); 
     }
 
     try {
-      // ВАЖНО: для FormData заголовок 'Content-Type' в fetch ставить НЕЛЬЗЯ (браузер сделает это сам)
-      // Поэтому нам нужно слегка изменить вызов apiRequest или использовать обычный fetch
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:8000/api/profile/pets/', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
-          // Content-Type тут НЕ ПИШЕМ!
         },
         body: data
       });
@@ -35,8 +38,8 @@ export default function AddPetForm({ onPetAdded }) {
       const newPet = await response.json();
       alert('Улюбленця додано!');
       
-      // Очистка
-      setFormData({ name: '', species: 'dog', birth_date: '' });
+
+      setFormData({ name: '', species: 'dog', birth_date: '', status: 'active' });
       setPhoto(null);
       onPetAdded(newPet);
     } catch (err) {
@@ -59,16 +62,27 @@ export default function AddPetForm({ onPetAdded }) {
         >
           <option value="dog">Песик</option>
           <option value="cat">Котик</option>
-          <option value="bird">Пташка</option>
+          <option value="parrot">Пташка</option>
           <option value="other">Інше</option>
         </select>
+
+        <div style={{ marginBottom: '10px' }}>
+          <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px', fontWeight: 'bold' }}>Статус тваринки:</label>
+          <select 
+            className="input" 
+            value={formData.status}
+            onChange={e => setFormData({...formData, status: e.target.value})}
+          >
+            <option value="active">🏠 Я маю сім'ю</option>
+            <option value="adoption">🔍 Шукаю сім'ю (Адопція)</option>
+          </select>
+        </div>
 
         <input 
           className="input" type="date" required 
           value={formData.birth_date} onChange={e => setFormData({...formData, birth_date: e.target.value})} 
         />
-
-        {/* НОВОЕ ПОЛЕ ДЛЯ ФОТО */}
+        
         <div style={{ margin: '10px 0' }}>
           <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px' }}>Фото улюбленця:</label>
           <input 

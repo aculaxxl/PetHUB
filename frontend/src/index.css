@@ -53,7 +53,7 @@ body { background-color: #f0f2f5; color: #1a1a1a; font-family: 'Segoe UI', Tahom
 h1, h3 { color: #1c1e21; margin-bottom: 20px; }
 p, li { color: #4b5563; line-height: 1.6; }
 
-/* Кнопки и инпуты */
+
 .input {
   width: 100%;
   padding: 12px;
