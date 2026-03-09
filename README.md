@@ -43,11 +43,9 @@ PetHub is a specialized social network designed for pet owners. Unlike tradition
     ```bash```
     docker-compose up --build
 3. Initialize the database (run in a new terminal):
-    docker-compose exec backend python manage.py migrate
-4. Access the services:
-    Frontend: http://localhost:5173
-    Backend API: http://localhost:8000/api/
-    Swagger UI: http://localhost:8000/api/docs/
+### 🔗 Access the Services
 
-Author
-Developed by Yelyzaveta Novitska 
+- **Frontend (Web App):** [http://localhost:5173](http://localhost:5173) — *The main user interface.*
+- **API Documentation (Swagger):** [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/) — *Interactive portal to explore and test all API endpoints.*
+
+> **Note:** The backend API root is located at `http://localhost:8000/api/`. Use the Swagger UI above to interact with specific resources like `/news/` or `/profile/`.
