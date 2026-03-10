@@ -2,7 +2,14 @@
 
 PetHub is a specialized social network designed for pet owners. Unlike traditional platforms, PetHub allows users to create profiles for their pets and publish news, stories, and updates specifically from the pet's perspective.
 
-##  Key Features
+## **Key Features**
+
+*   **Pet-Centric Social Networking**: Create and manage unique profiles for your pets, posting updates and stories from their perspective.
+*   **Smart Adoption System**: A multi-step workflow for pet adoption. Contact information (phone numbers) remains hidden until the owner officially approves the adoption request.
+*   **Ownership Transfer**: Secure digital handover of pet profiles from one user to another, maintaining the pet's history and data.
+*   **Phone-Based Auth (SMS Mimic)**: Custom authentication system using phone numbers and verification codes (logged to terminal for development) via **SimpleJWT**.
+*   **News Feed**: Interactive feed for pet stories, news, and community updates.
+*   **Responsive UI**: Fully mobile-friendly interface built with React and custom CSS.
 
 ##  Tech Stack
 
